@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <title>前端项目模块化</title>
+  <meta name="description" content="  sass书写的css,用jade写HTML文件的的测试、检查、合并、压缩、格式化、部署，监听。压缩合并可以减少,可以减少css,js文件请求,优化前端性能。">
+  <link href="/assets/dp.ico" rel="shortcut icon" type="image/x-icon">
+  <link href='https://fonts.css.network/css?family=PT+Sans:400,700,400italic,700italic|Source+Sans+Pro:400,700,200,300|Josefin+Sans:400,600,700,300' rel='stylesheet' type='text/css'>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="canonical" href="//install/2016/03/30/module.html">
+  <link rel="alternate" type="application/rss+xml" title="Petter Strong" href="//feed.xml">
+</head>
+
+
+  <body>
+
+    
+<div class="wrapper">
+  <center> <a href="/"><div class="site-title">   Petter Strong </div></a></center>
+</div>
+<div class="wrapper site-description">
+<center>  coder,designer </center>
+</div>
+<div class="wrapper">
+  <div class="trigger site-navigation">
+    <a class="page-link" href="/">HOME</a><span class="exclamationMark">/</span>
+
+    
+    
+
+    <a class="page-link" href="/about/">About</a><span class="exclamationMark">/</span>
+    
+    
+    
+
+    <a class="page-link" href="/design/">Design</a><span class="exclamationMark">/</span>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    <a class="page-link" href="/science/">Science</a><span class="exclamationMark">/</span>
+    
+    
+    
+    
+  </div>
+</div>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline"><a class="post-title-link"  href="/install/2016/03/30/module.html">前端项目模块化</a></h1>
+  <center>  <p class="post-meta"><time datetime="2016-03-30T22:15:31+08:00" itemprop="datePublished">Mar 30, 2016</time></p>
+    
+     <div class="">
+       <center><p ><strong><span class="authorKeyword">Author</span><span class="small-site-title"> <h2 style="letter-spacing: 3px !important;
+       text-transform: uppercase !important;">张 明</h2></span></strong></p></center>
+
+     </div>
+     
+   </center>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <blockquote>
+  <p>sass书写的css,用jade写HTML文件的的测试、检查、合并、压缩、格式化、部署，监听。压缩合并可以减少,可以减少css,js文件请求,优化前端性能。</p>
+</blockquote>
+
+<h3>一、准备工作</h3>
+
+<hr />
+
+<h3>全局安装</h3>
+
+<p>首先，假设你的电脑已经装好node.js环境，且已经具有<code class="highlighter-rouge">npm(Node.js package manager)</code>包管理工具。</p>
+
+<p>那么好，为啥我们需要一个包管理工具呢？因为我们在Node.js上开发时，会用到很多别人写的JavaScript代码。如果我们要使用别人写的某个包，每次都根据名称搜索一下官方网站，下载代码，解压，再使用，非常繁琐。于是一个集中管理的工具应运而生：大家都把自己开发的模块打包后放到npm官网上，如果要使用，直接通过npm安装就可以直接用，不用管代码存在哪，应该从哪下载。</p>
+
+<p>更重要的是，如果我们要使用模块A，而模块A又依赖于模块B，模块B又依赖于模块X和模块Y，npm可以根据依赖关系，把所有依赖的包都下载下来并管理起来。否则，靠我们自己手动管理，肯定既麻烦又容易出错。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>npm install gulp -g  
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">-g</code>,全局安装。将安装在全局路径中，并且写入环境变量中。通过命令行在任何地方调用。但是注意！！！在我Mac系统下有出现一些问题。此处有坑，请好好看看。</p>
+
+<p>非全局安装，安装在当前定位目录， 本地安装将安装在定位目录的<code class="highlighter-rouge">node_modules</code>文件夹下，通过<code class="highlighter-rouge">require()</code>调用；</p>
+
+<h3>项目文件夹下处理命令</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>cd foldername
+</code></pre>
+</div>
+
+<p>进入文件夹</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo touch package.json
+</code></pre>
+</div>
+
+<p>创建新文件<code class="highlighter-rouge">package.json</code></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>npm init
+</code></pre>
+</div>
+
+<p>在<code class="highlighter-rouge">package.json</code>中输入相关信息（信息比较多，可以直接enter过）</p>
+
+<p>发现没有<code class="highlighter-rouge">gulp</code>这个时候需要输入</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>npm install gulp --save-dev
+</code></pre>
+</div>
+
+<hr />
+<hr />
+<p>解释：</p>
+
+<p><code class="highlighter-rouge">--save</code>：将保存配置信息至<code class="highlighter-rouge">package.json</code>（package.json是nodejs项目配置文件）；</p>
+
+<p><code class="highlighter-rouge">-dev</code>：保存至package.json的devDependencies节点，不指定-dev将保存至dependencies节点；</p>
+
+<hr />
+<hr />
+
+<p>输入完成之后，出现一个<code class="highlighter-rouge">node_modules</code>文件夹(观察文件夹下的文档不能为空！！)。
+如果已经存在配置文件的话直接输入 <code class="highlighter-rouge">npm install</code></p>
+
+<p>##二、Gulp基础</p>
+
+<hr />
+
+<h3>创建任务</h3>
+
+<hr />
+
+<p>在根目录下创建一个<code class="highlighter-rouge">gulpfile.js</code>文件，且在文件中写入(命令行中写入指令是<code class="highlighter-rouge">sudo touch filename</code> 、<code class="highlighter-rouge">ctrl+o</code>保存、<code class="highlighter-rouge">ctrl+x</code>退出)如下信息：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>var gulp=require('gulp');  //创建gulp模板
+
+gulp.task('halo',function(){
+		console.log('halo gulp!');
+
+	})  
+</code></pre>
+</div>
+
+<p>在命令行中输入<code class="highlighter-rouge">gulp halo</code>命令执行输出<code class="highlighter-rouge">halo gulp</code>。
+简单介绍一下默认任务。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>gulp.task('default',function(){
+		console.log('halo gulp!');
+	}) //可以使用数组定义回调函数
+gulp.task('user',['default'])  //数组中放入定义的字符串，然后命令输入gulp就可以执行了。
+</code></pre>
+</div>
+
+<hr />
+
+<h3>文件文件夹处理</h3>
+<hr />
+<p><code class="highlighter-rouge">gulp.src()</code>方法可以帮组我们找出将要处理的文件，
+<code class="highlighter-rouge">gulp.pipe()</code>方法处理找到的文件。<code class="highlighter-rouge">pipe()</code>可以理解为管道，每个管道指定功能，然后使用<code class="highlighter-rouge">gulp.dest()</code>方法把处理好的文件放在指定的地方。</p>
+
+<p>使用gulp实现文件的拷贝：</p>
+
+<p>新建一个测试的index.html写入相关内容，在<code class="highlighter-rouge">gulpfile.js</code>输入内容。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>gulp.task('copy',function(){
+	//gulp.src() 找到测试文件index.html 然后使用.pipe()通道
+	//gulp.dest() 发布拷贝
+
+	return gulp.src('index.html').pipe(gulp.dest('dist'));  //自动生成保存文件夹dist
+
+	})
+</code></pre>
+</div>
+
+<p>执行<code class="highlighter-rouge">gulp copy</code>命令，然后去dist目录下验证</p>
+
+<p>拷贝图片文件 从某个工程下拷贝图片，在<code class="highlighter-rouge">gulpfile.js</code>文件中写入如下：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>gulp.task('img',function(){
+	return gulp.src('img/*.jpg').pipe(gulp.dest('dist/img'));
+	})
+</code></pre>
+</div>
+
+<p>执行<code class="highlighter-rouge">gulp img</code>，验证图片</p>
+
+<p>拷贝img文件夹以及文件夹下的文件</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>gulp.task('img',function(){
+	gulp.src('img/**').pipe(gulp.dest('dist/img'));
+	})
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">/*</code> 代表拷贝文件夹以及文件夹下的文件
+<code class="highlighter-rouge">/**</code> 代表文件夹下所有文件以及子文件夹下的所有文件（全拷贝）</p>
+
+<p>两个文件夹同时拷贝到某一个文件夹下</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>gulp.task('data',function(){
+		return gulp.src(['xml/*.xml','json/*.json']).pipe(gulp.dest('dist/data'));
+	})
+</code></pre>
+</div>
+
+<p>排除某个文件<code class="highlighter-rouge">!json/b.json</code></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>gulp.task('data',function(){
+		return gulp.src(['xml/*.xml','json/*.json','!json/b.json']).pipe(gulp.dest('dist/data'));
+	})
+</code></pre>
+</div>
+
+<p>使用回调函数执行多个任务</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>gulp.task('build',['copy','img','data'],function(){
+	console.log('编译成功');
+	})
+</code></pre>
+</div>
+
+<p>执行命令<code class="highlighter-rouge">gulp build</code>查看效果</p>
+
+<hr />
+
+<h3>侦测文件变化</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>gulp.task('watch',function(){
+	gulp.watch('index.html',['copy']):
+	gulp.watch('img/*.{jpg,png}',['img']):
+	gulp.watch(['xml/*.xml','json/*.json','!json/b.json'],['data']):
+
+	})
+</code></pre>
+</div>
+
+<p>执行 <code class="highlighter-rouge">gulp watch</code> ，<code class="highlighter-rouge">ctrl+c</code>结束，回到文件查看效果</p>
+
+<h3>三、Gulp插件安装</h3>
+
+<hr />
+
+<p>安装依赖指令</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>npm install gulp-sass --save-dev  //安装sass
+
+npm install gulp-connect --save-dev  //gulp-connect搭建本地服务
+
+npm install gulp-concat --save-dev  //合并文件插件
+
+npm install gulp-uglify --save-dev  //将合并后的js进行压缩
+
+npm install gulp-rename --save-dev  //保留压缩前后的两个文件
+
+npm install gulp-minify-css --save-dev  //压缩css
+
+npm install gulp-imagemin --save-dev  //对图片进行压缩
+</code></pre>
+</div>
+
+<hr />
+
+<p>gulp编译sass</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>var sass = require('gulp-sass');
+
+gulp.task('sass',function(){
+	return gulp.src('stylesheet/**/*.css').pipe(sass()).pipe(gulp.dest('dist/css'));
+	}) ----
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">gulp-connect</code>搭建本地服务</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>var connect= require('gulp-connect');
+gulp.task('sever',function(){
+	connect.sever({root:'dist'});
+
+	}) 启动服务：命令行执行`gulp sever`  修改文件后页面自动刷新
+
+gulp.task('sever',function(){
+	connect.sever({
+		root:'dist',
+		livereload:true,
+		})
+	}) 然后还要在`copy`任务中添加
+
+gulp.task('copy',function(){
+	return gulp.src('index.html').pipe(gulp.dest()).pipe(connect.reload())
+	}) 在watch中添加
+gulp.task('watch',function(){
+	gulp.watch('index.html',['copy']);
+}) 然后创建一个
+gulp.task('default',['sever','watch'])
+</code></pre>
+</div>
+
+<p>最后执行<code class="highlighter-rouge">gulp default</code>命令</p>
+
+<hr />
+
+<p>合并文件gulp-concat</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>var concat = require('gulp-concat');
+
+gulp.task('scripts',function(){
+	return gulp.src(['javascripts/avalon.js','javascripts/index.js'])
+	.pipe(concat('vendor.js'))
+	.pipe(gulp.dest('dist/js'));
+})
+</code></pre>
+</div>
+
+<hr />
+
+<p>将合并js文件进行压缩</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>var uglify = require('gulp-uglify');
+
+gulp.task('scripts',function(){
+	return gulp.src(['javascripts/avalon.js','javascripts/index.js'])
+	.pipe(concat('vendor.js'))
+	.pipe(uglify())
+	.pipe(gulp.dest('dist/js'));
+}) ---- 保留前后压缩两个文件
+
+var rename = require('gulp-rename');
+
+gulp.task('scripts',function(){
+	return gulp.src(['javascripts/avalon.js','javascripts/index.js'])
+	.pipe(concat('vendor.js'))
+	.pipe(gulp.dest('dist/js'))
+	.pipe(uglify())
+	.pipe(rename('vendor.min.js'))
+	.pipe(gulp.dest('dist/js')); 
+})
+</code></pre>
+</div>
+
+<hr />
+<p>压缩css</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>var minifyCss = require('gulp-minify-css');
+gulp.task('sass',function(){
+	return gulp.src('stylesheet/**/*.sass')
+	.pipe(sass())
+	.pipe(minifyCss())
+	.pipe(gulp.dest('dist/css'));
+})
+</code></pre>
+</div>
+
+<hr />
+<p>对图片进行压缩</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>var imagemin = require('gulp-imagemin'); 
+gulp.task('images',function(){
+	return gulp.src('images/**/*')
+	.pipe(imagemin())
+	.pipe(gulp.dest('dist/images'))
+})
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">gulp images</code>执行命令</p>
+
+
+  </div>
+
+
+</article>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading small-site-title">Petter Strong</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list footer-content">
+          <li>Powered By <a href="http://github.com/hemangsk/Gravity">Gravity</a></li>
+          <li>Made with <i class="fa fa-heart"></i> on <a href="http://jekyllrb.com"><span style="color:#f03">{ { Jekyll } }</a></span></li>
+
+
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2 footer-content">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/petterstrong"><span class="icon icon--github"><svg viewBox="0 0 16 16"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">petterstrong</span></a>
+
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/petterstrong"><span class="icon icon--twitter"><svg viewBox="0 0 16 16"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
+</span><span class="username">petterstrong</span></a>
+
+          </li>
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3 site-description">
+        <p>coder,designer</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

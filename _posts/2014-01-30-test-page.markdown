@@ -1,0 +1,7 @@
+---
+layout: post
+title:  "谢天谢地你来啦!"
+date:   2014-01-30 11:45:31 +0530
+categories: jekyll update
+---
+中文测试
