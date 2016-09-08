@@ -5,15 +5,23 @@
 # For technical reasons, this file is *NOT* reloaded automatically when you use
 # 'jekyll serve'. If you change this file, please restart the server process.
 
-# Site settings
-title: Petter Strong
+#注意！！：配置文件应当放入站点所有共有信息，例如：简介、社交账号等等
+#而且！！：鉴于现有的技术问题，没有像其他生成器一样的实时文件监控机制
+#所以，在更改配置文件之后，使用jekyll build 将配置写入，在开启服务是很必要的
+
+# Site settings(站点设置)
+name: Petter Strong
 email: jokemigo@live.com
-description: coder,designer
+self-description: coder,designer,photographer
+seo-description: 思想，总结，手记，技术，分享，干货，独立，人生，梦想，摄影，旅行，音乐，电影
+keywords: 分享，前端，技术，独立，学习
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "/" # the base hostname & protocol for your site
 twitter_username: petterstrong
 github_username:  petterstrong
+weibo_username:  zhangmzer
 
+#建设选项
 # Build settings
 markdown: kramdown
 # exclude: ["/_site/download"]

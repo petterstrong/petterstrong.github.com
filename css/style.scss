@@ -5,8 +5,8 @@
 
 
 
-// Our variables
-$base-font-family: "PT Sans", Helvetica, Arial, sans-serif;
+// Our variables（基础变量）
+$base-font-family: Georgia, serif, sans-serif;
 $base-font-size:   16px;
 $base-font-weight: 400;
 $small-font-size:  $base-font-size * 0.875;
@@ -22,7 +22,7 @@ $grey-color:       #828282;
 $grey-color-light: lighten($grey-color, 40%);
 $grey-color-dark:  darken($grey-color, 25%);
 
-// Width of the content area
+// Width of the content area（内容区域宽度设置）
 $content-width:    800px;
 
 $on-palm:          600px;
@@ -46,6 +46,8 @@ $on-laptop:        800px;
 
 
 // Import partials from `sass_dir` (defaults to `_sass`)
+//导出外部样式
+
 @import
         "base",
         "layout",
@@ -58,7 +60,7 @@ $on-laptop:        800px;
  */
 body, h1, h2, h3, h4, h5, h6,
 p, blockquote, pre, hr,
-dl, dd, ol, ul, figure {
+dl, dd, dt,ol, ul, figure ,input,fieldset, legend, img ,input{
     margin: 0;
     padding: 0;
 }
@@ -66,18 +68,12 @@ dl, dd, ol, ul, figure {
 
 
 /**
- * Basic styling
+ * Basic styling（基础样式设置）
  */
 body {
     font: $base-font-weight #{$base-font-size}/#{$base-line-height} $base-font-family;
     color: $text-color;
-    background-color: $background-color;
-    -webkit-text-size-adjust: 100%;
-    -webkit-font-feature-settings: "kern" 1;
-    -moz-font-feature-settings: "kern" 1;
-    -o-font-feature-settings: "kern" 1;
-    font-feature-settings: "kern" 1;
-    font-kerning: normal;
+    min-width: 320px;
 }
 
 
@@ -85,9 +81,7 @@ body {
 /**
  * Set `margin-bottom` to maintain vertical rhythm
  */
-h1, h2, h3, h4, h5, h6,
-p, blockquote, pre,
-ul, ol, dl, figure,
+blockquote, pre,
 %vertical-rhythm {
     margin-bottom: $spacing-unit / 2;
 }
@@ -95,7 +89,7 @@ ul, ol, dl, figure,
 
 
 /**
- * Images
+ * Images(图片样式)
  */
 img {
     max-width: 100%;
@@ -105,7 +99,7 @@ img {
 
 
 /**
- * Figures
+ * Figures（媒体文件样式）
  */
 figure > img {
     display: block;
@@ -118,10 +112,11 @@ figcaption {
 
 
 /**
- * Lists
+ * Lists（列表样式）
  */
 ul, ol {
-    margin-left: $spacing-unit;
+    //margin-left: $spacing-unit;
+    list-style: none;
 }
 
 li {
@@ -134,7 +129,7 @@ li {
 
 
 /**
- * Headings
+ * Headings（头部样式）
  */
 h1, h2, h3, h4, h5, h6 {
     font-weight: $base-font-weight;
@@ -143,10 +138,10 @@ h1, h2, h3, h4, h5, h6 {
 
 
 /**
- * Links
+ * Links（链接link样式）
  */
 a {
-    color: #aaa !important;
+    color: #343434 !important;
     text-decoration: none;
 
     &:visited {
@@ -155,35 +150,14 @@ a {
 
     &:hover {
         color: black !important;
-        border-bottom: 1px dotted black ;
     }
 
-    &.page-link{
+    //设置详情页的link样式
+
+    &.article-link{
       &:hover {
           color: $text-color;
           border-bottom: 1px dotted black ;
-      }
-    }
-    &.postLink{
-      color: black !important;
-      &:hover {
-
-          border-bottom: 1px dotted black ;
-      }
-
-      &:visited {
-          color: "crimson" !important;
-      }
-    }
-    &.post-title-link{
-      color: black !important;
-      &:hover {
-
-          border-bottom: 1px dotted black !important ;
-      }
-
-      &:visited {
-          color: "crimson" !important;
       }
     }
 }
@@ -191,7 +165,7 @@ a {
 
 
 /**
- * Blockquotes
+ * Blockquotes（引言样式）
  */
 blockquote {
     color: $grey-color;
@@ -209,7 +183,7 @@ blockquote {
 
 
 /**
- * Code formatting
+ * Code formatting（code样式设置）
  */
 pre,
 code {
@@ -289,324 +263,70 @@ pre {
     }
 }
 
-.post {
-  font-family: "Source Sans Pro";
-  font-size: 18px;
-  font-weight: 300;
-  padding-top: 0;
-}
-.home{
-  padding-bottom: 5em;
-}
-.download {
-  padding: 10px;
-}
-.authorKeyword {
-  text-transform: uppercase;
-  font-size: 16px;
-  letter-spacing: 2px;
-  text-indent: 2px;
-  padding-top:0.5em;
-}
-.writtenBy {
-  letter-spacing: 0;
-  text-indent: 0;
-  text-transform: uppercase;
-}
-.archive-intro {
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  text-indent: 2px;
-}
-.archiveIntro {
-  text-align: center;
-}
-.hint {
-  text-transform: uppercase;
-  font-size: 11px;
-  letter-spacing: 2px;
-  text-indent: 2px;
-}
-.example {
-  font-family: 'Menlo';
-  padding: 10px;
-}
-.manual {
-  text-transform: uppercase;
-  font-size: 16px;
-  letter-spacing: 2px;
-  text-indent: 2px;
-}
-.postContent {
-  padding-top: 3.5em;
-  text-align: center;
-}
-.postDate {
-  float: left;
-  text-transform: uppercase;
-  font-family: "Source Sans Pro";
-  font-size: 16px;
-  font-weight: 300;
-  letter-spacing: 2px;
-  text-indent: 2px;
-}
-.postTag {
-  float: right;
-}
-.postTitle {
-  font-weight: 400;
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  text-indent: 3px;
-}
 /**
- * Site header
+ * Welcome page(主页样式)
  */
-.site-header {
-  border-top: 5px solid $grey-color-dark;
-  border-bottom: 1px solid $grey-color-light;
-  min-height: 56px;
-  // Positioning context for the mobile navigation icon
-  position: relative;
-}
-.site-title {
-  font-size: 64px;
-  font-weight: 100;
-  font-family: 'PT Sans';
-  text-transform: capitalize;
-  font-weight: 500;
-  margin-top: 1em;
-  &,
-  &:visited {
-    color: $grey-color-dark;
-  }
-}
-.site-description {
-  font-size: 14px;
-  letter-spacing: 2px;
-  text-indent: 6px;
-  font-family: 'Josefin Sans';
-}
-.exclamationMark {
-  padding-left: 2em;
-  padding-right: 2em;
-}
-.site-navigation {
-  color: #aaa;
-  text-transform: uppercase;
-  font-size: 14px;
-  letter-spacing: 2px;
-  text-indent: 6px;
-  font-family: 'Josefin Sans';
-  font-weight: 300;
-  padding-top: 5em;
-  text-align: center;
-}
-.page-title {
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  text-indent: 2px;
-  font-family: "PT Sans";
-  font-size: 12px;
-}
-.page-tagline {
-  font-size: 18px;
-  font-family: "PT Sans";
-  color: rgb(170, 170, 170);
-  text-align: center;
-  text-transform: lowercase;
-}
-.page-link {
-  color: rgb(170, 170, 170);
-}
-.site-nav {
-  .page-link {
-    color: $text-color;
-    line-height: $base-line-height;
-    // Gaps between nav items, but not on the last one
-    &:not(:last-child) {
-      margin-right: 20px;
+ .home_bg{
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  background: -webkit-radial-gradient(50% 50%,#b51212 1%,#111 100%);
+  background: -moz-radial-gradient(50% 50%,#b51212 1%,#111 100%);
+  background: radial-gradient(at 50% 50%,#b51212 1%,#111 100%);
+ }
+ .home_info_card{
+  //整体样式设置
+  $height: 500px;
+  $width: 400px;
+
+  //具体样式设置
+  height: $height;
+  width: $width;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -$height/2;
+  margin-left:-$width/2;
+  z-index: 10;
+  background: rgba(153,136,136,.8);
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 20px;
+
+  //内部样式设置
+  h1{
+    $height: $spacing-unit*3;
+    height: $height;
+    display: -webkit-box;
+    #logo{
+      display: inline-block;
+      line-height: $height;
     }
-  }
-  @include media-query($on-palm) {
-    position: absolute;
-    top: 9px;
-    right: $spacing-unit / 2;
-    background-color: $background-color;
-    border: 1px solid $grey-color-light;
-    border-radius: 5px;
-    text-align: right;
-    .menu-icon {
-      display: block;
-      float: right;
-      width: 36px;
-      height: 26px;
-      line-height: 0;
-      padding-top: 10px;
-      text-align: center;
-      > svg {
-        width: 18px;
-        height: 15px;
-        path {
-          fill: $grey-color-dark;
+    .logo_title{
+      height: $height;
+      -webkit-box-flex: 1;
+      p{
+        text-align: center;
+        height: $height/2;
+        line-height: $height/2;
+        font-size: $base-font-size*1.5;
+        &.logo_title_tips{
+          font-size: $base-font-size;
         }
       }
     }
-    .trigger {
-      clear: both;
-      display: none;
-    }
-    &:hover .trigger {
-      display: block;
-      padding-bottom: 5px;
-    }
-    .page-link {
-      display: block;
-      padding: 5px 10px;
-      &:not(:last-child) {
-        margin-right: 0;
-      }
-      margin-left: 20px;
-    }
-  }
-}
-/**
- * Site footer
- */
-.site-footer {
-  border-top: 1px solid $grey-color-light;
-  padding: $spacing-unit 0;
-}
-.footer-heading {
-  font-size: 18px;
-  margin-bottom: $spacing-unit / 2;
-}
-.contact-list,
-.social-media-list {
-  list-style: none;
-  margin-left: 0;
-}
-.small-site-title {
-  font-family: "PT Sans";
-}
-.footer-col-wrapper {
-  font-size: 15px;
-  color: $grey-color;
-  margin-left: -$spacing-unit / 2;
-  @extend %clearfix;
-}
-.footer-content {
-  font-family: "Josefin Sans";
-  font-weight: 300;
-  letter-spacing: 1px;
-}
-.footer-col {
-  float: left;
-  margin-bottom: $spacing-unit / 2;
-  padding-left: $spacing-unit / 2;
-}
-.footer-col-1 {
-  width: -webkit-calc(35% - (#{$spacing-unit} / 2));
-  width: calc(35% - (#{$spacing-unit} / 2));
-}
-.footer-col-2 {
-  width: -webkit-calc(20% - (#{$spacing-unit} / 2));
-  width: calc(20% - (#{$spacing-unit} / 2));
-}
-.footer-col-3 {
-  width: -webkit-calc(45% - (#{$spacing-unit} / 2));
-  width: calc(45% - (#{$spacing-unit} / 2));
-}
-@include media-query($on-laptop) {
-  .footer-col-1,
-  .footer-col-2 {
-    width: -webkit-calc(50% - (#{$spacing-unit} / 2));
-    width: calc(50% - (#{$spacing-unit} / 2));
-  }
-  .footer-col-3 {
-    width: -webkit-calc(100% - (#{$spacing-unit} / 2));
-    width: calc(100% - (#{$spacing-unit} / 2));
-  }
-}
-@include media-query($on-palm) {
-  .footer-col {
-    float: none;
-    width: -webkit-calc(100% - (#{$spacing-unit} / 2));
-    width: calc(100% - (#{$spacing-unit} / 2));
-  }
-}
-/**
- * Page content
- */
-.page-content {
-  padding: 0;
-}
-.page-heading {
-  font-size: 20px;
-}
-.post-list {
-  margin-left: 0;
-  list-style: none;
-  > li {
-    margin-bottom: $spacing-unit;
-  }
-}
-.post-meta {
-  font-size: $small-font-size;
-  color: $grey-color;
-  text-transform: uppercase;
-  font-size: 16px;
-}
-.post-link {
-  display: block;
-  font-size: 24px;
-}
-/**
- * Posts
- */
-.post-header {
-  margin-bottom: $spacing-unit;
-}
-.post-title {
-  font-size: 62px;
 
-  text-align: center;
-  font-family: "PT Sans";
-  font-weight: 900;
-  @include media-query($on-laptop) {
-    font-size: 36px;
   }
-}
-.post-content {
-  margin-bottom: $spacing-unit;
-  padding-bottom: 3em !important;
-  p {
-    font-size: 1.5rem;
-  }
-  h2 {
-    font-size: 32px;
-    @include media-query($on-laptop) {
-      font-size: 28px;
-    }
-  }
-  h3 {
-    font-size: 26px;
-    @include media-query($on-laptop) {
-      font-size: 22px;
-    }
-  }
-  h4 {
-    font-size: 20px;
-    @include media-query($on-laptop) {
-      font-size: 18px;
-    }
-  }
-}
+
+
+ }
+
+
 
 /**
- * Syntax highlighting styles
+ * Syntax highlighting styles(引入语法时高亮颜色)
  */
 .highlight {
     background: #fff;
