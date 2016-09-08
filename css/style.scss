@@ -29,6 +29,21 @@ $on-palm:          600px;
 $on-laptop:        800px;
 
 
+//图标列表
+@font-face {font-family: 'icon';
+    src: url('../font/iconfont.eot'); /* IE9*/
+    src: url('../font/iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('../font/iconfont.woff') format('woff'), /* chrome、firefox */
+    url('iconfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+    url('iconfont.svg#iconfont') format('svg'); /* iOS 4.1- */
+}
+.icon{
+    font-family:"icon" !important;
+    font-size:16px;font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;}
+
 
 // Use media queries like this:
 // @include media-query($on-palm) {
@@ -263,6 +278,15 @@ pre {
     }
 }
 
+//全局公共样式
+.fl{
+  float: left;
+}
+.fr{
+  float: right;
+}
+
+
 /**
  * Welcome page(主页样式)
  */
@@ -280,6 +304,7 @@ pre {
   //整体样式设置
   $height: 500px;
   $width: 400px;
+  box-shadow: 0 0px 3px #ccc;
 
   //具体样式设置
   height: $height;
@@ -318,6 +343,100 @@ pre {
       }
     }
 
+  }
+  .home_tabs{
+    //公共样式
+    width: 100%;
+    
+    margin-bottom: 20px;
+    background: hsla(0,0%,100%,.3);
+    border-radius: 12px;
+    color: #fff;
+    overflow: hidden;
+    position: relative;
+    &::before{
+      content:'';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      filter: blur(20px);
+    }
+    .home_tabs_header{
+      height: 30px;
+      width: 100%;
+      line-height: 30px;
+      background: hsla(0,100%,100%,.3);
+      box-sizing: border-box;
+      padding: 0 12px;
+      overflow: hidden;
+      position: relative;
+      .icon{
+        font-size: 20px;
+        position: absolute;
+        top: 50%;
+        left: 12px;
+        margin-top: -10px;
+      }
+      span{
+        margin-left: 30px;
+      }
+    }
+    .home_tabs_content{
+      overflow: hidden;
+      width: 100%;
+      box-sizing: border-box;
+      display: -webkit-box;
+      padding: 0 12px;
+    }
+  }
+  .home_weather_bar{
+    height: 150px;
+    margin-top: 20px;
+    .home_weather_content{
+      .home_weather_img{
+        height: 130px;
+      }
+      .home_weather_tips{
+        -webkit-box-flex: 3;
+        box-sizing: border-box;
+        padding-top: 15px;
+        .home_weather_location{
+          color: #000;
+          font-weight: 600;
+        }
+        .home_weather_tit{
+          height: $spacing-unit;
+          line-height: $spacing-unit;
+          color: #444;
+          font-size: $small-font-size;
+        }
+      }
+      .home_weather_temptures{
+        -webkit-box-flex: 1;
+        box-sizing: border-box;
+        padding-top: 15px;
+      }
+    }
+  }
+  .home_list_bar{
+    min-height: 100px;
+    height: auto!important;
+    height: 100px;
+    .home_list_content{
+      //高度公共样式
+      $link-height:70px;
+
+      min-height: $link-height;
+      height: auto!important;
+      height: $link-height;
+      .home_list_link{
+        a{color: #f03;}
+        -webkit-box-flex: 1;
+        line-height: $link-height;
+      }
+    }
   }
 
 
