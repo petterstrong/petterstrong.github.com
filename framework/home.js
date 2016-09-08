@@ -5,7 +5,7 @@
 
 		console.log("hey,man\n欢迎来到彼得·张的博客，很希望能一起交流，分享技术\n%c联系方式：jokemigo@163.com",'color: #f03');
 		$.ajax({
-			url:'//api.jirengu.com/weather.php',
+			url:'http://api.jirengu.com/weather.php',
 			type:'get',
 			// callback:'showWeather',
 			dataType:'jsonp',
