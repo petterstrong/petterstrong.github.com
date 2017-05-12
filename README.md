@@ -1,6 +1,21 @@
-##这是个小而简单的网站
+# gp-page
 
-###致力于提高网站的加载速度，暂时还没有很有营养的博文。
-<br/>
-十月开始正式发博文，欢迎各位老鸟，大牛来批评指正。
+> my personl blog pages with Vue
 
+## Build Setup
+
+``` bash
+# install dependencies
+npm install
+
+# serve with hot reload at localhost:8080
+npm run dev
+
+# build for production with minification
+npm run build
+
+# build for production and view the bundle analyzer report
+npm run build --report
+```
+
+# personal-pages
